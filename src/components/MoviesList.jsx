@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import { getMoviesByPage } from "../utils/pagine";
-import HeartComponent from "./HeartComponent";
+import HeartIcon from "./HeartIcon";
 import Pagination from "./Pagination";
 
 const MoviesList = () => {
@@ -58,7 +58,7 @@ const MoviesList = () => {
                 <td>{value.genre.name}</td>
                 <td>{value.numberInStock}</td>
                 <td>
-                  <HeartComponent
+                  <HeartIcon
                     onLikeChange={() => handleLikeChange(value)}
                     liked={value.liked}
                   />

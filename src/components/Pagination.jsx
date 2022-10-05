@@ -1,4 +1,5 @@
 import _ from "lodash";
+import PropTypes from "prop-types";
 
 const Pagination = ({ onPageChange, pageSize, currentPage, itemCount }) => {
   const pageCount = Math.ceil(itemCount / pageSize);
@@ -18,7 +19,7 @@ const Pagination = ({ onPageChange, pageSize, currentPage, itemCount }) => {
               <a
                 onClick={() => onPageChange(value)}
                 className="page-link"
-                href="#"
+                style={{ cursor: "pointer" }}
               >
                 {value}
               </a>
@@ -28,6 +29,13 @@ const Pagination = ({ onPageChange, pageSize, currentPage, itemCount }) => {
       </ul>
     </nav>
   );
+};
+
+Pagination.propType = {
+  onPageChange: PropTypes.func.isRequired,
+  pageSize: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  itemCount: PropTypes.number.isRequired,
 };
 
 export default Pagination;

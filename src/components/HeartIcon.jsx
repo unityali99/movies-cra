@@ -1,7 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid, regular } from "@fortawesome/fontawesome-svg-core/import.macro";
+import PropTypes from "prop-types";
 
-const HeartComponent = ({ onLikeChange, liked }) => {
+const HeartIcon = ({ onLikeChange, liked }) => {
   const iconStyle = liked ? solid("heart") : regular("heart");
 
   return (
@@ -15,4 +16,9 @@ const HeartComponent = ({ onLikeChange, liked }) => {
   );
 };
 
-export default HeartComponent;
+HeartIcon.propType = {
+  onLikeChange: PropTypes.func.isRequired,
+  liked: PropTypes.bool.isRequired,
+};
+
+export default HeartIcon;
