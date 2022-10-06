@@ -37,4 +37,4 @@ Pagination.propType = {
   itemCount: PropTypes.number.isRequired,
 };
 
-export default Pagination;
+export default memo(Pagination);

@@ -1,16 +1,25 @@
 import HeartIcon from "./HeartIcon";
 
-const MoviesTable = ({ movies, onLike, onDelete }) => {
+const MoviesTable = ({ movies, onLike, onDelete, onSort }) => {
+  const cursorStyle = { cursor: "pointer" };
   return (
     <table className="table table-dark text-center">
       <thead>
         <tr>
           <th>row</th>
-          <th>Title</th>
-          <th>Genre</th>
-          <th>Number In Stock</th>
+          <th style={cursorStyle} onClick={() => onSort("title")}>
+            Title
+          </th>
+          <th style={cursorStyle} onClick={() => onSort("genre.name")}>
+            Genre
+          </th>
+          <th style={cursorStyle} onClick={() => onSort("numberInStock")}>
+            Number In Stock
+          </th>
           <th></th>
-          <th>Daily Rental Rate</th>
+          <th style={cursorStyle} onClick={() => onSort("dailyRentalRate")}>
+            Daily Rental Rate
+          </th>
         </tr>
       </thead>
       <tbody>
