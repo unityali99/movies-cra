@@ -1,4 +1,4 @@
-import { getGenres } from "../services/fakeGenreService";
+import { getGenres } from "../../services/fakeGenreService";
 import PropTypes from "prop-types";
 
 const GenreList = ({ onGenreChange, currentGenre }) => {

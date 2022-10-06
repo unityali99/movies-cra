@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import { getMoviesByPage } from "../utils/pagine";
-import GenreList from "./GenreList";
-import HeartIcon from "./HeartIcon";
-import Pagination from "./Pagination";
+import GenreList from "./common/GenreList";
+import MoviesTable from "./common/MoviesTable";
+import Pagination from "./common/Pagination";
 
-const MoviesList = () => {
+const Movies = () => {
   const [allMovies, setAllMovies] = useState(getMovies());
   const [pageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
@@ -59,43 +59,11 @@ const MoviesList = () => {
           />
         </div>
         <div className="col-10 p-2">
-          <table className="table table-dark text-center">
-            <thead>
-              <tr>
-                <th>row</th>
-                <th>Title</th>
-                <th>Genre</th>
-                <th>Number In Stock</th>
-                <th></th>
-                <th>Daily Rental Rate</th>
-              </tr>
-            </thead>
-            <tbody>
-              {movies.map((value, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{value.title}</td>
-                  <td>{value.genre.name}</td>
-                  <td>{value.numberInStock}</td>
-                  <td>
-                    <HeartIcon
-                      onLikeChange={() => handleLikeChange(value)}
-                      liked={value.liked}
-                    />
-                  </td>
-                  <td>{value.dailyRentalRate}</td>
-                  <td>
-                    <button
-                      onClick={() => handleDelete(value)}
-                      className="btn btn-danger btn-outline-warning text-white"
-                    >
-                      {"Delete"}
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <MoviesTable
+            onLike={handleLikeChange}
+            onDelete={handleDelete}
+            movies={movies}
+          />
         </div>
       </div>
       <Pagination
@@ -108,4 +76,4 @@ const MoviesList = () => {
   );
 };
 
-export default MoviesList;
+export default Movies;
