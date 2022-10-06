@@ -1,30 +1,30 @@
 import { getGenres } from "../services/fakeGenreService";
+import PropTypes from "prop-types";
 
 const GenreList = ({ onGenreChange, currentGenre }) => {
   const cursor = { cursor: "pointer" };
+  const genres = [{ name: "All" }, ...getGenres()];
   return (
     <ul className="list-group">
-      <li
-        style={cursor}
-        onClick={() => onGenreChange("all")}
-        className={`list-group-item ${currentGenre === "all" ? "active" : ""}`}
-      >
-        {"All Genres"}
-      </li>
-      {getGenres().map((genre, index) => (
-        <li
+      {genres.map((genre, index) => (
+        <a
           style={cursor}
           onClick={() => onGenreChange(`${genre.name}`)}
           key={index}
-          className={`list-group-item ${
+          className={`list-group-item list-group-item-action ${
             currentGenre === genre.name ? "active" : ""
           }`}
         >
           {genre.name}
-        </li>
+        </a>
       ))}
     </ul>
   );
+};
+
+GenreList.propType = {
+  onGenreChange: PropTypes.func.isRequired,
+  currentGenre: PropTypes.string.isRequired,
 };
 
 export default GenreList;

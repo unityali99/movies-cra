@@ -9,7 +9,7 @@ const MoviesList = () => {
   const [allMovies, setAllMovies] = useState(getMovies());
   const [pageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentGenre, setCurrentGenre] = useState("all");
+  const [currentGenre, setCurrentGenre] = useState("All");
 
   const handleDelete = (movie) => {
     setAllMovies(allMovies.filter((m) => m._id !== movie._id));
@@ -24,7 +24,7 @@ const MoviesList = () => {
 
   const handleGenreChange = (genre) => {
     setCurrentPage(1);
-    genre === "all"
+    genre === "All"
       ? setAllMovies(getMovies())
       : setAllMovies(getMovies().filter((mov) => mov.genre.name === genre));
     console.log(genre);
@@ -39,10 +39,12 @@ const MoviesList = () => {
         <h4 className="text-center font-weight-bold p-3">
           {"There are no movies in the database"}
         </h4>
-        <GenreList
-          currentGenre={currentGenre}
-          onGenreChange={handleGenreChange}
-        />
+        <div className="col-2">
+          <GenreList
+            currentGenre={currentGenre}
+            onGenreChange={handleGenreChange}
+          />
+        </div>
       </React.Fragment>
     );
 
