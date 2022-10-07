@@ -1,5 +1,6 @@
 import { getGenres } from "../../services/fakeGenreService";
 import PropTypes from "prop-types";
+import { memo } from "react";
 
 const GenreList = ({ onGenreChange, currentGenre }) => {
   const cursor = { cursor: "pointer" };
@@ -27,4 +28,4 @@ GenreList.propType = {
   currentGenre: PropTypes.string.isRequired,
 };
 
-export default GenreList;
+export default memo(GenreList);
