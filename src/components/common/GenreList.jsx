@@ -1,9 +1,10 @@
 import { getGenres } from "../../services/fakeGenreService";
 import PropTypes from "prop-types";
+import { memo, useMemo } from "react";
 
 const GenreList = ({ onGenreChange, currentGenre }) => {
   const cursor = { cursor: "pointer" };
-  const genres = [{ name: "All" }, ...getGenres()];
+  const genres = useMemo(() => [{ name: "All" }, ...getGenres()], []);
   return (
     <ul className="list-group">
       {genres.map((genre, index) => (
@@ -27,4 +28,4 @@ GenreList.propType = {
   currentGenre: PropTypes.string.isRequired,
 };
 
-export default GenreList;
+export default memo(GenreList);

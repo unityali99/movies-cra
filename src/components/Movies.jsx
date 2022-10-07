@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import { useState } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import { getMoviesByPage } from "../utils/pagine";
 import GenreList from "./common/GenreList";
@@ -11,10 +11,7 @@ const Movies = () => {
   const [pageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentGenre, setCurrentGenre] = useState("All");
-  const [currentSortStatus, setCurrentSortStatus] = useState({
-    sortValue: "title",
-    order: "asc",
-  });
+  const [currentSortValue, setCurrentSortValue] = useState("title");
 
   const handleDelete = (movie) => {
     setAllMovies(allMovies.filter((m) => m._id !== movie._id));
@@ -32,24 +29,10 @@ const Movies = () => {
     genre === "All"
       ? setAllMovies(getMovies())
       : setAllMovies(getMovies().filter((mov) => mov.genre.name === genre));
-    console.log(genre);
     setCurrentGenre(genre);
   };
 
-  const handleSort = (columnValue) => {
-    if (columnValue === currentSortStatus.sortValue) {
-      currentSortStatus.order === "asc"
-        ? setCurrentSortStatus({ ...currentSortStatus, order: "desc" })
-        : setCurrentSortStatus({ ...currentSortStatus, order: "asc" });
-      console.log(currentSortStatus);
-    } else setCurrentSortStatus({ sortValue: columnValue, order: "asc" });
-  };
-
-  const sortedMovies = _.sortBy(
-    allMovies,
-    [currentSortStatus.sortValue],
-    [currentSortStatus.order]
-  );
+  const sortedMovies = _.sortBy(allMovies, [currentSortValue]);
 
   const movies = getMoviesByPage(sortedMovies, currentPage, pageSize);
 
@@ -83,7 +66,7 @@ const Movies = () => {
             onLike={handleLikeChange}
             onDelete={handleDelete}
             movies={movies}
-            onSort={handleSort}
+            onSort={setCurrentSortValue}
           />
         </div>
       </div>
