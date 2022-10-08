@@ -31,7 +31,7 @@ const Movies = () => {
       : setAllMovies(getMovies().filter((mov) => mov.genre.name === genre));
     setCurrentGenre(genre);
   };
-
+  console.log();
   const sortedMovies = _.sortBy(allMovies, [currentSortValue]);
 
   const movies = getMoviesByPage(sortedMovies, currentPage, pageSize);
