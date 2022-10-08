@@ -1,27 +1,18 @@
 import HeartIcon from "./HeartIcon";
+import TableHeader from "./TableHeader";
 
 const MoviesTable = ({ movies, onLike, onDelete, onSort }) => {
-  const cursorStyle = { cursor: "pointer" };
+  const columnArray = [
+    { columnValue: "title", columnText: "Title" },
+    { columnValue: "genre.name", columnText: "Genre" },
+    { columnValue: "numberInStock", columnText: "In Stock" },
+    {},
+    { columnValue: "dailyRentalRate", columnText: "Daily Rental Rate" },
+    {},
+  ];
   return (
     <table className="table table-dark text-center">
-      <thead>
-        <tr>
-          <th>row</th>
-          <th style={cursorStyle} onClick={() => onSort("title")}>
-            Title
-          </th>
-          <th style={cursorStyle} onClick={() => onSort("genre.name")}>
-            Genre
-          </th>
-          <th style={cursorStyle} onClick={() => onSort("numberInStock")}>
-            Number In Stock
-          </th>
-          <th></th>
-          <th style={cursorStyle} onClick={() => onSort("dailyRentalRate")}>
-            Daily Rental Rate
-          </th>
-        </tr>
-      </thead>
+      <TableHeader onSort={onSort} columnArray={columnArray} />
       <tbody>
         {movies.map((value, index) => (
           <tr key={index}>
