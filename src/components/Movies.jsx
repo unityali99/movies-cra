@@ -66,7 +66,7 @@ const Movies = () => {
             onLike={handleLikeChange}
             onDelete={handleDelete}
             movies={movies}
-            onSort={setCurrentSortValue}
+            onSort={{ currentSortValue, setCurrentSortValue }}
           />
         </div>
       </div>
