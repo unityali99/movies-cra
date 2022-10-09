@@ -1,22 +1,6 @@
-import {
-  light,
-  solid,
-  thin,
-} from "@fortawesome/fontawesome-svg-core/import.macro";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SortIcon from "./SortIcon";
 
 const TableHeader = ({ columnArray, onSort }) => {
-  const cursorStyle = { cursor: "pointer" };
-
-  const renderSortIcon = (currentColumnValue, columnValueInState) => {
-    const sortIcon =
-      currentColumnValue === columnValueInState
-        ? solid("sort-amount-up")
-        : solid("sort-amount-down");
-
-    return <FontAwesomeIcon icon={sortIcon} />;
-  };
-
   return (
     <thead>
       <tr>
@@ -24,16 +8,26 @@ const TableHeader = ({ columnArray, onSort }) => {
         {columnArray.map((column, index) => (
           <th
             key={index}
-            style={column.columnValue && cursorStyle}
+            style={column.columnValue && { cursor: "pointer" }}
             onClick={
               column.columnValue
                 ? () => onSort.setCurrentSortValue(column.columnValue)
                 : () => {}
             }
+            onMouseOver={(e) =>
+              column.columnValue && (e.target.style.background = "#424a51")
+            }
+            onMouseLeave={(e) =>
+              column.columnValue && (e.target.style.background = "#343a40")
+            }
           >
             {column.columnText}{" "}
-            {column.columnValue &&
-              renderSortIcon(column.columnValue, onSort.currentSortValue)}
+            {column.columnValue && (
+              <SortIcon
+                columnValueInState={onSort.currentSortValue}
+                currentColumnValue={column.columnValue}
+              />
+            )}
           </th>
         ))}
       </tr>
