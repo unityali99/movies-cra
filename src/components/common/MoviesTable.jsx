@@ -1,6 +1,5 @@
 import HeartIcon from "./HeartIcon";
-import TableBody from "./TableBody";
-import TableHeader from "./TableHeader";
+import Table from "./Table";
 
 const MoviesTable = ({ movies, onLike, onDelete, onSort }) => {
   const columnArray = [
@@ -24,12 +23,7 @@ const MoviesTable = ({ movies, onLike, onDelete, onSort }) => {
       ),
     },
   ];
-  return (
-    <table className="table table-dark text-center">
-      <TableHeader onSort={onSort} columnArray={columnArray} />
-      <TableBody data={movies} columns={columnArray} />
-    </table>
-  );
+  return <Table movies={movies} columnArray={columnArray} onSort={onSort} />;
 };
 
 export default MoviesTable;

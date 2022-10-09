@@ -1,11 +1,11 @@
 import SortIcon from "./SortIcon";
 
-const TableHeader = ({ columnArray, onSort }) => {
+const TableHeader = ({ columns, onSort }) => {
   return (
     <thead>
       <tr>
         <th>{"Row"}</th>
-        {columnArray.map((column, index) => (
+        {columns.map((column, index) => (
           <th
             key={index}
             style={column.columnValue && { cursor: "pointer" }}
