@@ -1,10 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import { getMoviesByPage } from "../utils/pagine";
 import GenreList from "./common/GenreList";
 import MoviesTable from "./common/MoviesTable";
 import Pagination from "./common/Pagination";
 import _ from "lodash";
+import Nav from "./common/Nav";
+import { Outlet } from "react-router-dom";
 
 const Movies = () => {
   const [allMovies, setAllMovies] = useState(getMovies());
@@ -32,8 +34,8 @@ const Movies = () => {
     setCurrentGenre(genre);
   };
   console.log();
-  const sortedMovies = _.sortBy(allMovies, [currentSortValue]);
 
+  const sortedMovies = _.sortBy(allMovies, [currentSortValue]);
   const movies = getMoviesByPage(sortedMovies, currentPage, pageSize);
 
   if (allMovies.length === 0)
@@ -52,7 +54,7 @@ const Movies = () => {
     );
 
   return (
-    <div className="container-fluid">
+    <React.Fragment>
       <h4 className="text-center font-weight-bold p-3 ">{`There are ${allMovies.length} movies in the database.`}</h4>
       <div className="row align-items-center">
         <div className="col-2">
@@ -76,7 +78,8 @@ const Movies = () => {
         onPageChange={setCurrentPage}
         currentPage={currentPage}
       />
-    </div>
+      <Outlet />
+    </React.Fragment>
   );
 };
 

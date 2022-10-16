@@ -8,7 +8,7 @@ const TableHeader = ({ columns, onSort }) => {
         {columns.map((column, index) => (
           <th
             key={index}
-            style={column.columnValue && { cursor: "pointer" }}
+            role={column.columnValue && "button"}
             onClick={
               column.columnValue
                 ? () => onSort.setCurrentSortValue(column.columnValue)

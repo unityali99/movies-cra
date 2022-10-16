@@ -1,9 +1,11 @@
-import Movies from "./components/Movies";
+import AppRoutes from "./components/common/Routing/AppRoutes";
 
 function App() {
   return (
     <div className="App">
-      <Movies />
+      <div className="container-fluid">
+        <AppRoutes />
+      </div>
     </div>
   );
 }

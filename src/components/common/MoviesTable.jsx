@@ -13,9 +13,9 @@ const MoviesTable = ({ movies, onLike, onDelete, onSort }) => {
     },
     { columnValue: "dailyRentalRate", columnText: "Daily Rental Rate" },
     {
-      content: (mpvie) => (
+      content: (movie) => (
         <button
-          onClick={() => onDelete(mpvie)}
+          onClick={() => onDelete(movie)}
           className="btn btn-danger btn-outline-warning text-white"
         >
           {"Delete"}
