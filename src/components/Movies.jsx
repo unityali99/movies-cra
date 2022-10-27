@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getMovies } from "../services/fakeMovieService";
+import { deleteMovie, getMovies } from "../services/fakeMovieService";
 import { getMoviesByPage } from "../utils/pagine";
 import GenreList from "./common/GenreList";
 import MoviesTable from "./common/MoviesTable";
@@ -16,7 +16,8 @@ const Movies = () => {
   const [currentSortValue, setCurrentSortValue] = useState("title");
 
   const handleDelete = (movie) => {
-    setAllMovies(allMovies.filter((m) => m._id !== movie._id));
+    deleteMovie(movie._id);
+    setAllMovies([...getMovies()]);
   };
 
   const handleLikeChange = (mov) => {

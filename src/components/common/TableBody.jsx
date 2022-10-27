@@ -11,17 +11,22 @@ const TableBody = ({ data, columns }) => {
   return (
     <tbody>
       {data.map((item, index) => (
-        <tr
-          onClick={() =>
-            navigate(`/movies/${item._id}`, { state: { title: "action" } })
-          }
-          role={"button"}
-          key={index}
-        >
+        <tr key={index}>
           <td>{index + 1}</td>
-          {columns.map((column, columnIndex) => (
-            <td key={columnIndex}>{renderCell(item, column)}</td>
-          ))}
+          {columns.map((column, columnIndex) =>
+            column.columnValue === "title" ? (
+              <td
+                key={columnIndex}
+                className="alert-link text-info"
+                style={{ cursor: "pointer" }}
+                onClick={() => navigate(`/movies/${item._id}`)}
+              >
+                {renderCell(item, column)}
+              </td>
+            ) : (
+              <td key={columnIndex}>{renderCell(item, column)}</td>
+            )
+          )}
         </tr>
       ))}
     </tbody>
