@@ -1,5 +1,8 @@
-const Alert = ({ color, message }) => (
-  <div className={`alert alert-${color} fade show w-25 mx-auto`}>{message}</div>
-);
+const Alert = ({ color, message }) =>
+  message && (
+    <div className={`alert alert-${color} fade show w-25 mx-auto text-center`}>
+      {message}
+    </div>
+  );
 
 export default Alert;

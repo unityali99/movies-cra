@@ -35,9 +35,7 @@ const Register = () => {
         })}
         type="email"
       />
-      {errors.email?.message && (
-        <Alert color="danger" message={errors.email?.message} />
-      )}
+      <Alert color="danger" message={errors.email?.message} />
 
       <Input
         label="Name :"
@@ -45,9 +43,7 @@ const Register = () => {
         register={register("name", { required: "Name field is required." })}
         type="name"
       />
-      {errors.name?.message && (
-        <Alert color="danger" message={errors.name?.message} />
-      )}
+      <Alert color="danger" message={errors.name?.message} />
 
       <Input
         label="Password :"
@@ -61,10 +57,7 @@ const Register = () => {
           },
         })}
       />
-
-      {errors.password?.message && (
-        <Alert color="danger" message={errors.password?.message} />
-      )}
+      <Alert color="danger" message={errors.password?.message} />
 
       <input type="submit" className="btn btn-primary mx-2 px-4" />
       <input type="reset" className="btn btn-warning mx-2 px-3" />
