@@ -3,9 +3,12 @@ import DropDownList from "./common/DropDownList";
 import { useForm } from "react-hook-form";
 import { getGenres } from "../services/fakeGenreService";
 import Alert from "./common/Alert";
-import { getMovies, saveMovie } from "../services/fakeMovieService";
+import { saveMovie } from "../services/fakeMovieService";
+import { useNavigate } from "react-router-dom";
 
 const AddMovie = ({ movie }) => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -19,7 +22,6 @@ const AddMovie = ({ movie }) => {
       numberInStock: data.numberInStock,
       dailyRentalRate: data.dailyRentalRate,
     });
-    console.log(getMovies());
   };
 
   return (
@@ -68,10 +70,19 @@ const AddMovie = ({ movie }) => {
         })}
       />
       <Alert color="danger" message={errors.dailyRentalRate?.message} />
-
       <Input
         type="submit"
-        className="btn btn-primary btn-outline-warning mx-auto w-50 "
+        className="btn btn-primary btn-outline-warning mx-auto w-50"
+        children={
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+            className="btn btn-warning w-25"
+          >
+            {"Return"}
+          </button>
+        }
       />
     </form>
   );

@@ -2,7 +2,7 @@ import { Route, Routes, Navigate, HashRouter } from "react-router-dom";
 import AddMovie from "../../AddMovie";
 import Customers from "../../Customers";
 import Movies from "../../Movies";
-import NotFound from "../../NotFound";
+import NotFound from "../NotFound";
 import Rentals from "../../Rentals";
 import MovieEdit from "../../MovieEdit";
 import Nav from "../Nav";
