@@ -40,6 +40,7 @@ const Movies = () => {
 
   const handleSearch = (inputValue) => {
     setCurrentGenre("All");
+    setCurrentPage(1);
     if (inputValue)
       return setAllMovies(
         getMovies().filter((value) =>
