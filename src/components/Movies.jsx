@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { deleteMovie, getMovies } from "../services/fakeMovieService";
+import React, { useEffect, useState } from "react";
+import { deleteMovie } from "../services/fakeMovieService";
+import { getMovies } from "../services/movieService";
 import { getMoviesByPage } from "../utils/pagine";
 import GenreList from "./common/GenreList";
 import MoviesTable from "./common/MoviesTable";
@@ -11,16 +12,25 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 const Movies = () => {
-  const [allMovies, setAllMovies] = useState(getMovies());
+  const [dbMovies, setDbMovies] = useState([]);
+  const [allMovies, setAllMovies] = useState([]);
   const [pageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentGenre, setCurrentGenre] = useState("All");
   const [currentSortValue, setCurrentSortValue] = useState("title");
   const { register } = useForm();
 
+  useEffect(() => {
+    getMovies().then((movies) => setDbMovies(movies));
+  }, []);
+
+  useEffect(() => {
+    setAllMovies(dbMovies);
+  }, [dbMovies]);
+
   const handleDelete = (movie) => {
     deleteMovie(movie._id);
-    setAllMovies([...getMovies()]);
+    setAllMovies([...dbMovies]);
   };
 
   const handleLikeChange = (mov) => {
@@ -33,8 +43,8 @@ const Movies = () => {
   const handleGenreChange = (genre) => {
     setCurrentPage(1);
     genre === "All"
-      ? setAllMovies(getMovies())
-      : setAllMovies(getMovies().filter((mov) => mov.genre.name === genre));
+      ? setAllMovies(dbMovies)
+      : setAllMovies(dbMovies.filter((mov) => mov.genre.name === genre));
     setCurrentGenre(genre);
   };
 
@@ -43,14 +53,14 @@ const Movies = () => {
     setCurrentPage(1);
     if (inputValue)
       return setAllMovies(
-        getMovies().filter((value) =>
+        dbMovies.filter((value) =>
           value.title
             .toLowerCase()
             .trim()
             .includes(inputValue.toLowerCase().trim())
         )
       );
-    setAllMovies(getMovies());
+    setAllMovies(dbMovies);
   };
 
   const sortedMovies = _.sortBy(allMovies, [currentSortValue]);
