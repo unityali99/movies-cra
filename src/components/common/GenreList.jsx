@@ -1,10 +1,19 @@
-import { getGenres } from "../../services/fakeGenreService";
+import { getGenres } from "../../services/genreService";
 import PropTypes from "prop-types";
-import { memo, useMemo } from "react";
+import { memo, useState } from "react";
+import { useEffect } from "react";
 
 const GenreList = ({ onGenreChange, currentGenre }) => {
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    getGenres().then((data) => {
+      data && setGenres([{ name: "All" }, ...data]);
+    });
+  }, []);
+
   const cursor = { cursor: "pointer" };
-  const genres = useMemo(() => [{ name: "All" }, ...getGenres()], []);
+
   return (
     <ul className="list-group">
       {genres.map((genre, index) => (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { deleteMovie } from "../services/fakeMovieService";
+import { deleteMovie, saveMovie } from "../services/movieService";
 import { getMovies } from "../services/movieService";
 import { getMoviesByPage } from "../utils/pagine";
 import GenreList from "./common/GenreList";
@@ -21,23 +21,26 @@ const Movies = () => {
   const { register } = useForm();
 
   useEffect(() => {
-    getMovies().then((movies) => setDbMovies(movies));
+    getMovies().then((movies) => {
+      movies && setDbMovies([...movies]);
+    });
   }, []);
 
   useEffect(() => {
     setAllMovies(dbMovies);
   }, [dbMovies]);
 
-  const handleDelete = (movie) => {
-    deleteMovie(movie._id);
-    setAllMovies([...dbMovies]);
+  const handleDelete = async (movie) => {
+    setDbMovies(dbMovies.filter((mov) => mov._id !== movie._id));
+    await deleteMovie(movie._id);
   };
 
-  const handleLikeChange = (mov) => {
-    let movies = [...allMovies];
+  const handleLikeChange = async (mov) => {
+    let movies = [...dbMovies];
     const index = movies.indexOf(mov);
     movies[index].liked = !movies[index].liked;
-    setAllMovies(movies);
+    setDbMovies(movies);
+    await saveMovie({ ...mov, genreId: mov.genre._id });
   };
 
   const handleGenreChange = (genre) => {
