@@ -10,14 +10,6 @@ const Register = () => {
   } = useForm();
   const onSubmit = (data) => console.log(data);
 
-  // console.log(watch("name"));
-
-  // useEffect(() => {
-  //   console.log(errors);
-
-  //   return () => {};
-  // }, [errors]);
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
