@@ -35,13 +35,13 @@ const Movies = () => {
     await deleteMovie(movie._id);
   };
 
-  const handleLikeChange = async (mov) => {
-    let movies = [...dbMovies];
-    const index = movies.indexOf(mov);
-    movies[index].liked = !movies[index].liked;
-    setDbMovies(movies);
-    await saveMovie({ ...mov, genreId: mov.genre._id });
-  };
+  // const handleLikeChange = async (mov) => {
+  //   let movies = [...dbMovies];
+  //   const index = movies.indexOf(mov);
+  //   movies[index].liked = !movies[index].liked;
+  //   setDbMovies(movies);
+  //   await saveMovie({ ...mov, genreId: mov.genre._id });
+  // };
 
   const handleGenreChange = (genre) => {
     setCurrentPage(1);
@@ -111,7 +111,7 @@ const Movies = () => {
             </div>
             <div className="col-10 p-2">
               <MoviesTable
-                onLike={handleLikeChange}
+                // onLike={handleLikeChange}
                 onDelete={handleDelete}
                 movies={movies}
                 onSort={{ currentSortValue, setCurrentSortValue }}

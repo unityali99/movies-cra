@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ERROR } from "../utils/toastColors";
 import { toastify } from "../utils/toastify";
 import config from "./config.json";
 
@@ -10,7 +11,7 @@ export async function getGenres() {
     const genres = await res.data;
     return genres;
   } catch (err) {
-    toastify(err.message);
+    toastify(err.message, ERROR);
   }
 }
 
@@ -20,6 +21,6 @@ export async function getGenre(id) {
     const genre = await res.data;
     return genre;
   } catch (err) {
-    toastify(err.message);
+    toastify(err.message, ERROR);
   }
 }
