@@ -10,7 +10,7 @@ const HeartIcon = ({ onLikeChange, liked }) => {
       size="2x"
       color="red"
       icon={iconStyle}
-      onClick={Change}
+      onClick={onLikeChange}
       cursor="pointer"
     />
   );

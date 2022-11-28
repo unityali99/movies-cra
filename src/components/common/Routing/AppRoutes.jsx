@@ -9,12 +9,12 @@ import Nav from "../Nav";
 import Register from "../Register";
 import Login from "../Login";
 import useLocalStorage from "../../../utils/customHooks/useLocalStorage";
+import { TOKEN } from "../../../utils/token";
 import decode from "jwt-decode";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const AppRoutes = () => {
-  const [token, setToken] = useLocalStorage("token", "");
+  const [token, setToken] = useLocalStorage(TOKEN, "");
   const [user, setUser] = useState(null);
 
   useEffect(() => {

@@ -1,14 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { WARNING } from "../../utils/toastColors";
-import { toastify } from "../../utils/toastify";
+import { logout } from "../../services/authService";
 
 const Nav = ({ user, setToken }) => {
-  const logout = () => {
-    setToken("");
-    toastify("Logged Out.", WARNING);
-  };
-
   return (
     <div className="container-fluid d-flex">
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -69,7 +63,11 @@ const Nav = ({ user, setToken }) => {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/" onClick={logout}>
+                  <NavLink
+                    className="nav-link"
+                    to="/"
+                    onClick={() => logout(setToken)}
+                  >
                     Logout
                   </NavLink>
                 </li>
