@@ -2,8 +2,13 @@ import axios from "axios";
 import { ERROR, SUCCESS } from "../utils/toastColors";
 import { toastify } from "../utils/toastify";
 import config from "./config.json";
+import { getJwt } from "./authService";
 
 const apiEndPoint = config.baseUrl + "/movies";
+
+const updateHeader = () => {
+  axios.defaults.headers.common["x-auth-token"] = getJwt();
+};
 
 export async function getMovies() {
   try {
@@ -27,6 +32,7 @@ export async function getMovie(id) {
 
 export async function deleteMovie(id) {
   try {
+    updateHeader();
     const res = await axios.delete(apiEndPoint + "/" + id);
     const deletedMovie = await res.data;
     toastify(`The Movie '${deletedMovie.title}' has been deleted.`, SUCCESS);
@@ -36,6 +42,7 @@ export async function deleteMovie(id) {
 }
 export async function saveMovie(movie) {
   try {
+    updateHeader();
     let res;
     if (movie._id) {
       res = await axios.put(apiEndPoint + "/" + movie._id, {

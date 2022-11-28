@@ -2,6 +2,7 @@ import config from "./config.json";
 import axios from "axios";
 import { toastify } from "../utils/toastify";
 import { ERROR, SUCCESS, WARNING } from "../utils/toastColors";
+import { TOKEN } from "../utils/token";
 
 const apiEndPoint = config.baseUrl + "/auth";
 
@@ -18,4 +19,8 @@ export const login = async (data) => {
 export const logout = (setToken) => {
   setToken("");
   toastify("Logged Out.", WARNING);
+};
+
+export const getJwt = () => {
+  return localStorage.getItem(TOKEN);
 };
