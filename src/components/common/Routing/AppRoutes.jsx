@@ -27,7 +27,7 @@ const AppRoutes = () => {
       <Nav setToken={setToken} user={user} />
       <Routes>
         <Route path="/" element={<Navigate to="/movies" />} />
-        <Route path="/movies" element={<Movies />} />
+        <Route path="/movies" element={<Movies user={user} />} />
         <Route path="/movies/:id" element={<MovieEdit />} />
         <Route path="/customers" element={<Customers />} />
         <Route path="/rentals" element={<Rentals />} />
@@ -36,7 +36,7 @@ const AppRoutes = () => {
           path="/login"
           element={<Login token={token} setToken={setToken} />}
         />
-        <Route path="/add-movie" element={<AddMovie />} />
+        <Route path="/add-movie" element={user ? <AddMovie /> : <NotFound />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </HashRouter>

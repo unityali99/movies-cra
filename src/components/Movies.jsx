@@ -11,7 +11,7 @@ import Input from "./common/Input";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-const Movies = () => {
+const Movies = ({ user }) => {
   const [dbMovies, setDbMovies] = useState([]);
   const [allMovies, setAllMovies] = useState([]);
   const [pageSize] = useState(4);
@@ -79,12 +79,14 @@ const Movies = () => {
         name="search"
       />
       <div className="text-center">
-        <Link
-          className="btn btn-primary btn-outline-warning px-4 py-2"
-          to="/add-movie"
-        >
-          Add Movie
-        </Link>
+        {user && (
+          <Link
+            className="btn btn-primary btn-outline-warning px-4 py-2"
+            to="/add-movie"
+          >
+            Add Movie
+          </Link>
+        )}
       </div>
       {allMovies.length === 0 && (
         <React.Fragment>
@@ -114,6 +116,7 @@ const Movies = () => {
                 onLike={handleLikeChange}
                 onDelete={handleDelete}
                 movies={movies}
+                user={user}
                 onSort={{ currentSortValue, setCurrentSortValue }}
               />
             </div>
